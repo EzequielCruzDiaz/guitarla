@@ -4,8 +4,8 @@ import Guitar from "./components/Guitar";
 import { db } from "./data/db";
 
 function App() {
-  const [data, setData] = useState([db]);
-
+  const [data, setData] = useState(db);
+  console.log(data);
   return (
     <>
       <Header />
@@ -14,8 +14,8 @@ function App() {
         <h2 className="text-center">Nuestra Colección</h2>
 
         <div className="row mt-5">
-          {data.map((id) => (
-            <Guitar key={id} />
+          {data.map((item) => (
+            <Guitar key={item.id} guitarprops={item} />
           ))}
         </div>
       </main>
