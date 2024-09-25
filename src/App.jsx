@@ -9,9 +9,12 @@ function App() {
 
   function addToCart(item) {
     const itemExist = cart.findIndex((guitar) => guitar.id === item.id);
-    console.log(itemExist);
-
-    setCart((prevcart) => [...prevcart, item]);
+    if (itemExist >= 0) {
+      console.log("Ya existe el item");
+    } else {
+      item.quantity = 1;
+      setCart((prevcart) => [...prevcart, item]);
+    }
   }
 
   return (
