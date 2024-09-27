@@ -1,7 +1,11 @@
-export default function Header({ cart }) {
-  const isEmpty = () => cart.length === 0;
-  const cartTotal = () =>
-    cart.reduce((total, item) => total + item.quantity * item.price, 0);
+import { useMemo } from "react";
+
+export default function Header({ cart, removeFromCart }) {
+  const isEmpty = useMemo(() => cart.length === 0, [cart]);
+  const cartTotal = useMemo(
+    () => cart.reduce((total, item) => total + item.quantity * item.price, 0),
+    [cart]
+  );
 
   return (
     <>
@@ -26,7 +30,7 @@ export default function Header({ cart }) {
                 />
 
                 <div id="carrito" className="bg-white p-3">
-                  {isEmpty() ? (
+                  {isEmpty ? (
                     <p className="text-center">El carrito esta vacio</p>
                   ) : (
                     <>
@@ -65,6 +69,7 @@ export default function Header({ cart }) {
                                 <button
                                   className="btn btn-danger"
                                   type="button"
+                                  onClick={() => removeFromCart(guitar.id)}
                                 >
                                   X
                                 </button>
@@ -76,7 +81,7 @@ export default function Header({ cart }) {
 
                       <p className="text-end">
                         Total pagar:{" "}
-                        <span className="fw-bold">{cartTotal()}</span>
+                        <span className="fw-bold">{cartTotal}</span>
                       </p>
                     </>
                   )}
